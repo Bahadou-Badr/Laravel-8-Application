@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -20,9 +21,10 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/posts', function () {
-    return view('posts.index');
-})->name('posts');
+//Posts
+Route::get('/posts', [PostController::class, 'index'])->name('posts');
+Route::post('/posts', [PostController::class, 'store']);
+
 //Login
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store']);
